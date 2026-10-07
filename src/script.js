@@ -1,39 +1,39 @@
-// ELEMENTS
-const post = document.querySelector("header div form"); // Get Event from form
-const content = document.querySelector("header div form input"); // Get User Input
+const form = document.querySelector("header div form");
+const userInput = document.querySelector("header div form input");
+const lists = document.querySelector("main ul");
 
-const lists = document.querySelector("main ul"); // get ul tag to store contents
-
-// Event
-post.addEventListener("submit", function (event) {
+// POST MACHINE
+form.addEventListener("submit", function (event) {
   event.preventDefault();
-  if (content.value !== "") {
+  if (userInput.value !== "") {
     lists.insertAdjacentHTML(
       "afterbegin",
       `
-    <li class="bg-gray-700 mb-2 flex justify-between p-2 rounded-lg"><span class="done-list inline-block cursor-pointer">${content.value}</span><span class="delete-list text-red-500 hover:text-red-600 inline-block cursor-pointer">x</span></li>
-    `,
+      <li class="bg-gray-700 mb-2 flex justify-between p-2 rounded-lg">
+          <span class="done-list inline-block cursor-pointer">${userInput.value}</span><span class="delete-list text-red-500 hover:text-red-600 inline-block cursor-pointer">x</span>
+        </li>
+      `,
     );
   }
-  content.value = "";
+  userInput.value = "";
+});
 
-  const doneList = document.querySelectorAll("main ul li .done-list");
-  for (let i = 0; i < doneList.length; i++) {
-    doneList[i].addEventListener("click", function () {
-      const done = doneList[i].parentElement;
+// LISTS MACHINE
+lists.addEventListener("click", function (event) {
+  const done = event.target.closest(".done-list");
+  const del = event.target.closest(".delete-list");
 
-      if (done.classList.contains("bg-lime-400") === false) {
-        done.classList.add("bg-lime-400");
-        done.parentElement.appendChild(done);
-      } else {
-        lists.prepend(done);
-      }
-    });
+  if (done) {
+    if (!done.parentElement.classList.contains("bg-lime-400")) {
+      done.parentElement.classList.add("bg-lime-400");
+      lists.appendChild(done.parentElement);
+    } else {
+      done.parentElement.classList.remove("bg-lime-400");
+      lists.prepend(done.parentElement);
+    }
   }
-  const deleteList = document.querySelectorAll("main ul li .delete-list");
-  for (let i = 0; i < deleteList.length; i++) {
-    deleteList[i].addEventListener("click", function () {
-      deleteList[i].parentElement.remove();
-    });
+
+  if (del) {
+    del.parentElement.remove();
   }
 });
