@@ -252,6 +252,9 @@
   .w-\[70\%\] {
     width: 70%;
   }
+  .w-\[80\%\] {
+    width: 80%;
+  }
   .w-\[100\%\] {
     width: 100%;
   }
@@ -487,6 +490,21 @@
     }
     .hover\:text-red-600:hover {
       color: var(--color-red-600);
+    }
+  }
+  @media (width >= 40rem) {
+    .sm\:w-\[80\%\] {
+      width: 80%;
+    }
+  }
+  @media (width >= 48rem) {
+    .md\:w-\[60\%\] {
+      width: 60%;
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:w-\[40\%\] {
+      width: 40%;
     }
   }
 }
