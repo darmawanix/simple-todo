@@ -25,13 +25,19 @@ lists.addEventListener("click", function (event) {
   const del = event.target.closest(".delete-list");
 
   if (done) {
-    if (!done.parentElement.classList.contains("bg-lime-400")) {
-      done.parentElement.classList.add("bg-lime-400");
-      lists.appendChild(done.parentElement);
-    } else {
-      done.parentElement.classList.remove("bg-lime-400");
-      lists.prepend(done.parentElement);
-    }
+    // if (!done.parentElement.classList.contains("bg-lime-400")) {
+    //   done.parentElement.classList.add("bg-lime-400");
+    //   lists.appendChild(done.parentElement);
+    // } else {
+    //   done.parentElement.classList.remove("bg-lime-400");
+    //   lists.prepend(done.parentElement);
+    // }
+
+    // MORE EFFICIENT
+    done.parentElement.classList.toggle("bg-lime-400");
+    const isDone = done.parentElement.classList.contains("bg-lime-400");
+
+    isDone ? lists.appendChild(done.parentElement) : lists.prepend(done.parentElement);
   }
 
   if (del) {
