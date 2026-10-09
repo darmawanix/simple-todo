@@ -10,10 +10,11 @@ form.addEventListener("submit", function (event) {
       "afterbegin",
       `
       <li class="bg-gray-700 mb-2 flex justify-between p-2 rounded-lg">
-          <span class="done-list inline-block cursor-pointer">${userInput.value}</span><span class="delete-list text-red-500 hover:text-red-600 inline-block cursor-pointer">x</span>
+          <span class="done-list inline-block cursor-pointer"></span><span class="delete-list text-red-500 hover:text-red-600 inline-block cursor-pointer">x</span>
         </li>
       `,
     );
+    document.querySelector(".done-list").textContent = userInput.value;
   }
   userInput.value = "";
 });
